@@ -89,7 +89,7 @@ class _Login extends Component {
         const { error } = this.state;
         const { attemptLogin } = this;
         return (
-            <button onClick={attemptLogin}>GitHub Login</button>
+            <a href ='/api/login'>GitHub Login</a>
         );
     }
 }
