@@ -9,15 +9,12 @@ const User = conn.define('user', {
     defaultValue: UUIDV4,
     primaryKey: true 
   },
-  email: {
+  name: {
     type: STRING,
     allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true
-    }
+    unique: true
   },
-  password: {
+  githubId: {
     type: STRING,
     allowNull: false
   }
@@ -49,15 +46,7 @@ User.findByToken = async function(token){
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
-  const users = [
-    { name: 'moe' },
-    { name: 'larry' },
-    { name: 'lucy' },
-    { name: 'ethyl' }
-  ];
-  const [moe, larry, lucy, ethyl] = await Promise.all(
-      users.map( user => User.create({ email: `${user.name}@gmail.com`, password: user.name.toUpperCase()}))
-  );
+  await User.create({ name: 'KeyWi', githubId: '25336223'})
 };
 
 module.exports = {
